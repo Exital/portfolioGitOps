@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "portfolio-webapp.fullname" . }}-test-connection"
+  labels:
+    {{- include "portfolio-webapp.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "portfolio-webapp.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
