@@ -1,4 +1,9 @@
 # values for portfolio production environment
+
+environment: prod
+
+envSecretName: "portfolio-webapp-env"
+
 image:
   repository: harbor.talrozen.com/portfolio/portfolio
   tag: "2.1.1"

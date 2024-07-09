@@ -4,6 +4,10 @@
 
 replicaCount: 1
 
+environment: ""
+
+envSecretName: ""
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent
