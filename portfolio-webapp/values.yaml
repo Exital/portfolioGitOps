@@ -78,11 +78,12 @@ resources: {}
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-
+  
+replicaCount: 1
 autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 

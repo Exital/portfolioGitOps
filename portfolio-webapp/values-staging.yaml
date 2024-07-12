@@ -1,4 +1,4 @@
-# values for portfolio production environment
+# values for portfolio staging environment
 
 
 sealedSecrets:
@@ -17,38 +17,8 @@ sealedSecrets:
     dockerconfigjson: AgBTu8qyoLOCYTus3deWfDdInyKxhAgDgBHVa7RenPAX6HMhVYXHW89Z8T9DcvyefsTpHj2PWqzTAAnxhslfi4ZteQiAKbps5Pqe3hHOgMmJs6H6J1fdlpGFU28RE7r9EgDMklnmL4SE7yBSvTawp6udNobGKy6nlqABFHfNsZ5QnZbNRcyaA5OHTFCGGMwEAHQ+HkCqjzCA3X9/o1m80Xsn4bWWx8A7uQFW47CbR7h8zGkqrVo60730tmN3MNHxaxldn72HuJZfd+kxKHTgal8KodGAVXbssYd/MZsIbfSvHhKD6Mo1W2oywjYoYcYyWKvpI6jnGg/Hr9ur2audY/YvY9B2MHTMct7Y9Z3Mv9YLJ6SUC8y67EhnTabNcOjOi+I3XWZWV+hjBhQIsSE8CPE6a2/Q+05F3+QXXzSvoqiDk2JwIh0AyzBIDi1q0zkykzHOQfx13XfUDGuUs6ucFSrezw8T4Zk2hK3QzdWGPd44asoGPzyggLEuhSnWmobYfOdz8UVx6cOodqrQ+KDXfmfgGurRlRfE0/x0As3PnGQDV0hBSEX28YbCL4WlWiCiQgVfLEBEoGH+WU9s00m3tH+sZdwzTS+pU2NxDXIwmmAnxagh7kg0dtL+yTTLCdX5KxPGzafSSWnAwwAFc6VVdD/51DVTT2EJSUNXCK7KSXrI5Tp9PKyKe+q4Z7Uf+naZCv62FfClY/hqNsY824BFNMCEwCxXMG3toeLYvhs0szKIHrk8OVBo7AhtJhA0nG4uWkZe1tW3wV6W2mSK+VqYHIukmTJaccjKtRYZQVfgscQr+SPmrtFENfLJc7n4OyY8qZ8LxrBRnx+flNWaiLGRXh32RDM=
 
 image:
-  repository: harbor.talrozen.com/portfolio/portfolio
-  tag: "2.1.1"
-
-nameOverride: ""
-fullnameOverride: ""
-
-serviceAccount:
-  # Specifies whether a service account should be created
-  create: true
-  # Annotations to add to the service account
-  annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
-  name: ""
-
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-service:
-  type: ClusterIP
-  targetPort: 3000
-  port: 80
+  repository: harbor.talrozen.com/portfolio/portfolio-prod
+  tag: "1.0.5"
 
 ingress:
   enabled: true
@@ -57,36 +27,12 @@ ingress:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
   hosts:
-    - host: talrozen.com
+    - host: staging.talrozen.com
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls: 
    - secretName: cloudflare-tls
      hosts:
-       - talrozen.com
+       - staging.talrozen.com
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
